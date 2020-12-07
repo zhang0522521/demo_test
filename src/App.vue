@@ -1,32 +1,48 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div id="app" v-cloak>
+     <router-view></router-view>
   </div>
 </template>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+export default {
+  name: 'App',
+  watch: {
+  },
+   created(){
+    var _this=this;
+    window.onload = function(){
+      if(!window.sessionStorage["tempFlag"]){
+            localStorage.removeItem("Authorization");
+            // localStorage.removeItem('label');
+          _this.$router.push({name:'login'})
+          
+      }else{
+        if (!localStorage.Authorization) {
+          _this.$router.push({name:'login'})
+        }
+      }
     }
-  }
+    window.onunload = function (){
+      window.sessionStorage["tempFlag"] = true;
+    }
+    window.onbeforeunload = function (){
+      window.sessionStorage["tempFlag"] = true; 
+    }
+  },
+}
+</script>
+<style lang="scss">
+*{
+  padding: 0;margin: 0;
+  list-style: none;
+}
+[v-cloak]{
+
+    display:none;
+
+      }
+html,body,#app{
+  width: 100%;
+  height: 100%;
 }
 </style>

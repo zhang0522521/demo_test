@@ -1,0 +1,151 @@
+<template>
+    <div class="app_all">
+        <span class="title">分组管理>>{{$route.query}}</span>
+        <div class="all_input">
+            <component v-for="(item,index) in dataAll.To1" :all_Item="item" :key="index" :is="item.is"></component>
+        </div>
+        <div class="all_button">
+            <component v-for="(item,index) in dataAll.To2" :all_Item="item" :key="index" :is="item.is"></component>
+        </div>
+        <div class="all_radio">
+            <RadioTables :tableall="dataAll.To3" :isTrue="isTrue"></RadioTables>
+        </div>
+    </div>
+</template>
+<script>
+import Button from './button.vue';
+import RadioTables from './Radio_table.vue';
+import Table from './table.vue';
+import Input from './input.vue';
+import Select from './select.vue';
+import Pocker from './picker.vue';
+import Time from './time.vue';
+export default {
+    name:'AllID',
+    props:['dataAll','isTrue','newView'],
+    components:{
+        Button,
+        RadioTables,
+        Table,
+        Select,
+        Input,
+        Pocker,
+		Time
+    },
+    mounted() {
+    	console.log(this.dataAll)
+    },
+    methods:{
+    }
+}
+</script>
+<style lang="scss">
+$bg:rgb(255, 255, 255,.1) !important;
+.font{
+font-size: 16px;
+font-family: Microsoft YaHei;
+font-weight: 400;
+color: #FFFFFF;
+}
+.fontTable{
+    background: #363186;
+    font-size: 15px;
+    font-family: Adobe Heiti Std;
+    font-weight: normal;
+    color: #FFFFFF;
+    box-shadow: 0 0 1px 0.5px #DFDFDF;
+}
+    .app_all{
+        min-width: 1200px;
+        background: $bg;
+        border-radius: 5px;
+        padding: 25px 45px;
+        box-shadow: border-box;
+         text-align: center;
+        .title{
+            display: block;
+            font-size: 17px;
+            text-align: left;
+            font-family: Adobe Heiti Std;
+            font-weight: normal;
+            color: #F3F3F3;
+            margin-bottom: 27px;
+        }
+        .all_input{
+            display: flex;
+            margin-bottom:35px;
+            div{
+                display: flex;
+                .input_span{
+                  white-space:nowrap;
+                  display: inline-block;
+                  @extend .font;
+                  height: 35px;
+                  line-height: 35px;
+                  margin-right: 15px;
+                }
+                .el-input{
+                    margin-right: 20px;
+                    height:35px;
+                    border: none;
+                    input{
+                        height: 100%;
+                        border: none;
+                         caret-color: white;
+                         color: white;
+                        box-shadow:0 0 1px 0.5px#D9D9D9;
+                        background: transparent;
+                    }
+                    .el-input__icon{
+                        line-height: 35px;
+                    }
+                }
+            }
+            button{
+                height: 35px;
+                line-height: 0;
+                padding: 12px 28px;
+            }
+        }
+        .all_button{
+            display: flex;
+            button{
+                margin-right: 38px;
+                height: 35px;
+                line-height: 0;
+                padding: 12px 28px;
+                margin-bottom: 34px;
+            }
+        }
+        .all_radio{
+            width: 100%;
+            .app_radioTable{
+                 box-shadow: 0 0 1px 0px #dcdce4;
+                 margin-bottom: 15px;
+                .app_pagination{
+                   display: block;
+                    margin-top: 10px;
+                    .el-pagination.is-background .el-pager li{
+                       @extend .fontTable;
+                    }
+                    .el-pagination.is-background .btn-next{
+                       @extend .fontTable;
+                    }
+                    .el-pagination.is-background .btn-prev{
+                         @extend .fontTable;
+                    }
+                    .el-pagination__editor.el-input .el-input__inner{
+                        @extend .fontTable;
+                        border: none;
+                    }
+                    .el-pagination__jump{
+                        font-size: 15px;
+                        font-family: Adobe Heiti Std;
+                        font-weight: normal;
+                        color: #FFFFFF;
+                    }
+                }
+            }
+        }
+    }
+</style>
