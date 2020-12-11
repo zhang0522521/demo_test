@@ -11,7 +11,7 @@
 			</router-link>
 			<template  v-for="(item1,index1) in item.children" >
 				<ul class="item1_ul" :key="index1" v-show="item1.value == $route.query.value ||item.value==$route.query.value">
-					<router-link class="item1_a" :to="{path:item1.path,query:{id:item1.id,value:item1.value}}" active-class="item1_active" exact>
+					<router-link class="item1_a" :to="{path:item1.nameTo,query:{id:item1.id,value:item1.value}}" active-class="item1_active" exact>
 						<li :class="{'item1_li':true}" @click="click1()">
 							<span>
 								<i class="p"></i>
@@ -39,8 +39,6 @@ export default {
 	},
     mounted(){
 		if(!this.$route.query.value){
-			console.log(11)
-			this.$router.push({path:'/',query:{id:1,value:'1'}})
 		}else{
 			this.a=this.$route.query.id;
 		}

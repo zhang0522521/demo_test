@@ -1,4 +1,9 @@
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
+    publicPath: process.env.NODE_ENV === 'production' ?
+        '/dist/' : '/',
+    outputDir: 'dist',
+    assetsDir: 'static',
     devServer: {
         overlay: { // 让浏览器 overlay 同时显示警告和错误
             warnings: true,
@@ -21,9 +26,39 @@ module.exports = {
             }
         }
     },
-	chainWebpack: config => {
-	        // 修复HMR
-	        config.resolve.symlinks(true);
-	 
-	}
+    css: {
+        loaderOptions: {
+            sass: {
+                prependData: `
+                  @import "src/assets/css/variable.scss";
+                  @import "src/assets/css/common.scss";
+                  @import "src/assets/css/mixin.scss";
+               `
+            }
+        }
+    },
+    chainWebpack: config => {
+        // 修复HMR
+        config.resolve.symlinks(true);
+    },
+    chainWebpack: config => {
+        configureWebpack: (config) => {
+            if (process.env.NODE_ENV === 'production') {
+                config.plugins.push(
+                    new UglifyJsPlugin({
+                        uglifyOptions: {
+                            compress: {
+                                warnings: false,
+                                drop_debugger: true, // console
+                                drop_console: true,
+                                pure_funcs: ['console.log'] // 移除console
+                            },
+                        },
+                        sourceMap: false,
+                        parallel: true,
+                    })
+                )
+            }
+        }
+    }
 }

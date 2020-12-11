@@ -9,12 +9,18 @@ export default {
     components:{
         AllID
     },
-    mounted(){
-        this.$store.commit('device/isTableall2')
-    },
     data(){
-        return{
-		}
+        return {
+            a:0
+        }
+    },
+    created(){
+     console.log('created');
+    },
+    mounted(){
+        this.a+=1;
+        console.log('mounted')
+        this.$store.commit('device/isTableall2')
     },
 }
 </script>

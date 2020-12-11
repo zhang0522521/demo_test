@@ -13,7 +13,6 @@ export default {
     window.onload = function(){
       if(!window.sessionStorage["tempFlag"]){
             localStorage.removeItem("Authorization");
-            // localStorage.removeItem('label');
           _this.$router.push({name:'login'})
           
       }else{
@@ -29,6 +28,17 @@ export default {
       window.sessionStorage["tempFlag"] = true; 
     }
   },
+  watch:{
+    '$route'(a,b){
+      if(window.localStorage.getItem('Authorization')!==this.$store.state.Authorization){
+          this.$router.push('/');
+           this.$message({
+          message: '登陆异常，请重新登录！',
+          type: 'warning'
+        });
+      }
+    }
+  }
 }
 </script>
 <style lang="scss">

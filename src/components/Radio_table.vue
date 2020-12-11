@@ -5,6 +5,7 @@
 			 @selection-change="handleSelectionChange">
 				<el-table-column type="selection" width="80">
 				</el-table-column>
+				
 				<template v-for="(i,index) in tableall.tableTitle">
 					<el-table-column :label="i.lable" :key="index" align="center" :property="i.prop" show-overflow-tooltip min-width="50">
 						<template slot-scope="scope">
@@ -59,6 +60,7 @@
 
 <script>
 	import Dialog from '@/components/dialog.vue';
+	import config from '@/config/index';
 	export default {
 		props: ['tableall','isTrue'],
 		components:{
@@ -66,6 +68,7 @@
 		},
 		data() {
 			return {
+				api:config.baseURL,
 				tableAll:[],
 				multipleSelection: [],
 				type:'',
@@ -73,14 +76,10 @@
 				editIndex:0,
 			}
 		},
-		computed:{
-			// tableAll(){
-			// 	console.log('s1')
-			// 	console.log(this.tableall.tablecon.slice(0, 10))
-			// 	return this.tableall.tablecon.slice(0, 10);
-			// }
-		},
 		mounted() {
+			// this.tableAll=[];
+			console.log(config.baseURL)
+			console.log(this.tableall.tablecon.slice(0,10))
 			this.tableAll=this.tableall.tablecon.slice(0,10);
 		},
 		methods: {

@@ -57,7 +57,7 @@ export default {
                console.log(res.data)
               _this.userToken = res.data.id;
               _this.$store.commit('setLoginInfo',{ Authorization: _this.userToken })
-               _this.$router.push('/');
+               _this.$router.push({name:'home',query:{id:1,value:'1'}});
               _this.$message({
                 message: '登录成功',
                 type: 'success'
