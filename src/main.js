@@ -12,19 +12,19 @@ Vue.use(ElementUI);
 const unsync = sync(store, router);
 console.log(unsync())
 Vue.config.productionTip = false;
-router.beforeEach((to, from, next) => {
-    if (to.path === '/login') {
-        sessionStorage.removeItem('user');
-    }
-    var user = sessionStorage.getItem('user');
-    if (!user && to.path !== '/login') {
-        next({
-            path: '/login'
-        })
-    } else {
-        next();
-    }
-})
+// router.beforeEach((to, from, next) => {
+//     if (to.path === '/login') {
+//         sessionStorage.removeItem('user');
+//     }
+//     var user = sessionStorage.getItem('user');
+//     if (!user && to.path !== '/login') {
+//         next({
+//             path: '/login'
+//         })
+//     } else {
+//         next();
+//     }
+// })
 new Vue({
     router,
     store,

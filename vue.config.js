@@ -1,7 +1,7 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production' ?
-        '/dist/' : '/',
+        '/static/' : '/',
     outputDir: 'dist',
     assetsDir: 'static',
     devServer: {
@@ -30,35 +30,35 @@ module.exports = {
         // 修复HMR
         config.resolve.symlinks(true);
     },
-	chainWebpack: config => {
-	        configureWebpack: (config) => {
-	            if (process.env.NODE_ENV === 'production') {
-	                config.plugins.push(
-	                    new UglifyJsPlugin({
-	                        uglifyOptions: {
-	                            compress: {
-	                                warnings: false,
-	                                drop_debugger: true, // console
-	                                drop_console: true,
-	                                pure_funcs: ['console.log'] // 移除console
-	                            },
-	                        },
-	                        sourceMap: false,
-	                        parallel: true,
-	                    })
-	                )
-	            }
-	        }
-	    },
-		css: {
-		    loaderOptions: {
-		        sass: {
-		            prependData: `
+    chainWebpack: config => {
+        configureWebpack: (config) => {
+            if (process.env.NODE_ENV === 'production') {
+                config.plugins.push(
+                    new UglifyJsPlugin({
+                        uglifyOptions: {
+                            compress: {
+                                warnings: false,
+                                drop_debugger: true, // console
+                                drop_console: true,
+                                pure_funcs: ['console.log'] // 移除console
+                            },
+                        },
+                        sourceMap: false,
+                        parallel: true,
+                    })
+                )
+            }
+        }
+    },
+    css: {
+        loaderOptions: {
+            sass: {
+                prependData: `
 		              @import "src/assets/css/variable.scss";
 		              @import "src/assets/css/common.scss";
 		              @import "src/assets/css/mixin.scss";
 		           `
-		        }
-		    }
-		}
+            }
+        }
+    }
 }

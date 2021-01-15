@@ -53,6 +53,12 @@ export default {
         if (this.loginForm.account === '' || this.loginForm.password === '') {
           this.$message.error('账户或密码不能为空');
         }else{
+          // _this.$store.commit('setLoginInfo',{ Authorization: '123456' });
+          // _this.$router.push({name:'home',query:{id:1,value:'1'}});
+          //     _this.$message({
+          //       message: '登录成功',
+          //       type: 'success'
+          //     });
             login({account:'HT01007', password:'123456'}).then(res=>{
                console.log(res.data)
               _this.userToken = res.data.id;
